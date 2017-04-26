@@ -1,0 +1,63 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        body{ padding-top:80px; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+    <div class="alert alert-success" ng-show="showSuccessAlert">
+       <button type="button" class="close" data-ng-click="switchBool('showSuccessAlert')" >×</button>
+       <strong>Done!</strong> {{successTextAlert}}
+     </div>
+
+    <h1><span class="fa fa-sign-in"></span> Signup</h1>
+
+    <!-- show any messages that come back with authentication -->
+   <!-- <% if (message.length > 0) { %>
+       <div class="alert alert-danger"><%= message %></div>
+    <% } %> -->
+
+    <!-- LOGIN FORM -->
+    <form name="signupForm" novalidate="novalidate" ng-submit="onSignup(signupForm.$valid)">
+        <div class="form-group" ng-class="{
+        'has-error':!signupForm.username.$valid && !signupForm.$pristine,
+        'has-success':signupForm.username.$valid && !signupForm.$pristine
+        }">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username" ng-model="newUserModel.username" required="required" ng-pattern="/^[A-Za-z0-9_]{1,32}$/">
+            <p class="help-block" ng-show="signupForm.username.$invalid && !signupForm.$pristine">
+                Please enter a valid username
+            </p>
+            <p class="help-block" ng-show="userError">
+                The username you entered has been taken
+            </p>
+        </div>
+        <div class="form-group" ng-class="{
+        'has-error':!signupForm.password.$valid && !signupForm.$pristine,
+        'has-success':signupForm.password.$valid && !signupForm.$pristine
+        }">
+            <label>Password</label>
+            <input type="password" ng-pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/" class="form-control" name="password" ng-model="newUserModel.password" required="required">
+            <p class="help-block"  ng-show="signupForm.password.$invalid && !signupForm.$pristine">
+                Please enter a valid password
+            </p>
+        </div>
+        <button type="submit" class="btn btn-warning btn-lg" >Signup</button>
+    </form>
+    <hr>
+
+    <p>Already have an account? <a href="#/login">Login</a></p>
+    <p>Or go <a href="#/">home</a>.</p>
+</div>
+
+</div>
+</body>
+</html>

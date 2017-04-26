@@ -1,0 +1,60 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>RBAC Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+    <style>
+        body        { padding-top:80px; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+<div class="col-sm-6 col-sm-offset-3">
+
+    <h1><span class="fa fa-sign-in"></span> Login</h1>
+
+    <!-- show any messages that come back with authentication -->
+    <!--<% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %> -->
+
+    <!-- LOGIN FORM -->
+    <form name="regForm" novalidate="novalidate" ng-submit="onLogin(regForm.$valid)">
+        <div class="form-group" ng-class="{
+        'has-error':!regForm.username.$valid && !regForm.$pristine,
+        'has-success':regForm.username.$valid && !regForm.$pristine
+        }">
+            <label>Username</label>
+            <input type="text" class="form-control" name="username" ng-model="userModel.username" required="required" ng-pattern="/^[A-Za-z0-9_]{1,32}$/">
+            <p class="help-block" ng-show="regForm.username.$invalid && !regForm.$pristine">
+                Please enter a valid username
+            </p>
+            <p class="help-block" ng-show="userError">
+                The username you entered has been taken
+            </p>
+        </div>
+        <div class="form-group" ng-class="{
+        'has-error':!regForm.password.$valid && !regForm.$pristine,
+        'has-success':regForm.password.$valid && !regForm.$pristine
+        }">
+            <label>Password</label>
+            <input type="password" ng-pattern="/(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/" class="form-control" name="password" ng-model="userModel.password" required="required">
+            <p class="help-block"  ng-show="regForm.password.$invalid && !regForm.$pristine">
+                Please enter a valid password
+            </p>
+        </div>
+        <button type="submit" class="btn btn-warning btn-lg" >Login</button>
+    </form>
+    <hr>
+
+    <p>Need an account? <a href="#/signup">Signup</a></p>
+    <p>Or go <a href="#/">home</a>.</p>
+
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+    <div class="breadcrumb pull-right where-am-i">
+      <form ng-submit="addtopic()">
+        <button type="submit" class="btn btn-primary">Add a topic</button>
+        <input type="text" ng-model="topic" placeholder="Topic name"></input>
+      </form>
+    </div>
+    <table class="table forum table-striped">
+    <thead>
+      <tr>
+        <th class="cell-stat"></th>
+        <th>
+          <h3>Topics</h3>
+        </th>
+        
+      </tr>
+    </thead>
+    <tbody
+      <tr ng-repeat="topic in topics | orderBy:'-'">
+        <td class="text-center"></td>
+        <td>
+          <div ng-show ="buttonEditMode()" class="pull-right ">
+          <button type="btn" ng-click="destroy(topic)" class="btn btn-danger">Destroy</button> 
+          <button type="btn" ng-click="toggleEditMode(this)" class="btn btn-info">Edit</button><br><br>
+          <form ng-submit="toggleEditMode(this); savetopic(topic)" ng-show="this.editMode || false">
+              <button type="submit" class="btn btn-success">Save changes</button>
+              <input type="text" ng-model="this.topic.name"></input>
+          </form>
+          </div>
+          <h4><a href ="#posts/show/{{topic._id}}">{{topic.topic}}</a></h4> 
+        </td>
+        </tr>
+      </tbody>
+      </table>
